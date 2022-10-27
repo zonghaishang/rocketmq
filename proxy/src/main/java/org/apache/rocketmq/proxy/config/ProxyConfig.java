@@ -161,6 +161,12 @@ public class ProxyConfig implements ConfigFile {
     // Example address: 127.0.0.1:1234
     private String metricCollectorAddress = "";
 
+    private String regionId = "";
+
+    private boolean traceOn = false;
+
+    private String remotingAccessPoint = "";
+
     @Override
     public void initData() {
         parseDelayLevel();
@@ -909,5 +915,29 @@ public class ProxyConfig implements ConfigFile {
 
     public void setGrpcClientIdleTimeMills(final long grpcClientIdleTimeMills) {
         this.grpcClientIdleTimeMills = grpcClientIdleTimeMills;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
+    public boolean isTraceOn() {
+        return traceOn;
+    }
+
+    public void setTraceOn(boolean traceOn) {
+        this.traceOn = traceOn;
+    }
+
+    public String getRemotingAccessPoint() {
+        return remotingAccessPoint;
+    }
+
+    public void setRemotingAccessPoint(String remotingAccessPoint) {
+        this.remotingAccessPoint = remotingAccessPoint;
     }
 }

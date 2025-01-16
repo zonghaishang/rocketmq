@@ -34,10 +34,10 @@ public class Producer {
         DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
 
         // Uncomment the following line while debugging, namesrvAddr should be set to your local address
-        //producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+        producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
 
         producer.start();
-        for (int i = 0; i < 128; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 Message msg = new Message(TOPIC, TAG, "OrderID188", "Hello world".getBytes(StandardCharsets.UTF_8));
                 SendResult sendResult = producer.send(msg);

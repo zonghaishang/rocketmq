@@ -17,9 +17,11 @@
 package org.apache.rocketmq.example.openmessaging;
 
 import io.openmessaging.Future;
+import io.openmessaging.KeyValue;
 import io.openmessaging.Message;
 import io.openmessaging.MessagingAccessPoint;
 import io.openmessaging.OMS;
+import io.openmessaging.internal.DefaultKeyValue;
 import io.openmessaging.producer.Producer;
 import io.openmessaging.producer.SendResult;
 import java.nio.charset.StandardCharsets;
@@ -32,8 +34,11 @@ public class SimpleProducer {
 
     public static void main(String[] args) {
         // You need to set the environment variable OMS_RMQ_DIRECT_NAME_SRV=true
+        KeyValue keyValue = new DefaultKeyValue();
+        keyValue.put("accessPoints", "localhost:9876");
+
         final MessagingAccessPoint messagingAccessPoint =
-            OMS.getMessagingAccessPoint(URL);
+            OMS.getMessagingAccessPoint(URL, keyValue);
 
         final Producer producer = messagingAccessPoint.createProducer();
 

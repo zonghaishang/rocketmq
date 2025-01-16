@@ -29,11 +29,12 @@ import java.util.List;
 public class Producer {
     public static void main(String[] args) throws MQClientException {
         try {
-            DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+            DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name8");
+            producer.setNamesrvAddr("127.0.0.1:9876");
             producer.start();
 
             String[] tags = new String[] {"TagA", "TagB", "TagC", "TagD", "TagE"};
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 int orderId = i % 10;
                 Message msg =
                     new Message("TopicTestjjj", tags[i % tags.length], "KEY" + i,

@@ -43,6 +43,7 @@ public class PullConsumer {
         //You would be better to register topics,It will use in rebalance when starting
         topics.add("TopicTest");
         consumer.setRegisterTopics(topics);
+
         consumer.start();
 
         ExecutorService executors = Executors.newFixedThreadPool(topics.size(), new ThreadFactoryImpl("PullConsumerThread"));
@@ -52,7 +53,7 @@ public class PullConsumer {
 
                 public void doSomething(List<MessageExt> msgs) {
                     //do your business
-
+                    System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
                 }
 
                 @Override

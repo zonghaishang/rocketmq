@@ -46,9 +46,9 @@ public class AclClient {
 
     private static final Map<MessageQueue, Long> OFFSE_TABLE = new HashMap<>();
 
-    private static final String ACL_ACCESS_KEY = "RocketMQ";
+    private static final String ACL_ACCESS_KEY = "test";
 
-    private static final String ACL_SECRET_KEY = "1234567";
+    private static final String ACL_SECRET_KEY = "test";
 
     public static void main(String[] args) throws MQClientException, InterruptedException {
         producer();
@@ -61,10 +61,10 @@ public class AclClient {
         producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 
-        for (int i = 0; i < 128; i++)
+        for (int i = 0; i < 1; i++)
             try {
                 {
-                    Message msg = new Message("TopicTest",
+                    Message msg = new Message("TopicTestYiJi",
                         "TagA",
                         "OrderID188",
                         "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
@@ -83,7 +83,7 @@ public class AclClient {
 
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_5", getAclRPCHook(), new AllocateMessageQueueAveragely());
         consumer.setNamesrvAddr("127.0.0.1:9876");
-        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("TopicTestYiJi", "*");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         // Wrong time format 2017_0422_221800
         consumer.setConsumeTimestamp("20180422221800");
@@ -105,7 +105,7 @@ public class AclClient {
         consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.start();
 
-        Set<MessageQueue> mqs = consumer.fetchSubscribeMessageQueues("TopicTest");
+        Set<MessageQueue> mqs = consumer.fetchSubscribeMessageQueues("TopicTestYiJi");
         for (MessageQueue mq : mqs) {
             System.out.printf("Consume from the queue: %s%n", mq);
             SINGLE_MQ:

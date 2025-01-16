@@ -16,11 +16,13 @@
  */
 package org.apache.rocketmq.example.openmessaging;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.Message;
 import io.openmessaging.MessagingAccessPoint;
 import io.openmessaging.OMS;
 import io.openmessaging.OMSBuiltinKeys;
 import io.openmessaging.consumer.PullConsumer;
+import io.openmessaging.internal.DefaultKeyValue;
 import io.openmessaging.producer.Producer;
 import io.openmessaging.producer.SendResult;
 import java.nio.charset.StandardCharsets;
@@ -33,8 +35,12 @@ public class SimplePullConsumer {
     public static void main(String[] args) {
         // You need to set the environment variable OMS_RMQ_DIRECT_NAME_SRV=true
 
+        KeyValue keyValue = new DefaultKeyValue();
+        keyValue.put("accessPoints", "localhost:9876");
+
+
         final MessagingAccessPoint messagingAccessPoint =
-            OMS.getMessagingAccessPoint(URL);
+            OMS.getMessagingAccessPoint(URL, keyValue);
 
         messagingAccessPoint.startup();
 
